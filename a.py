@@ -17,7 +17,7 @@ for name in ["a","b","c","d","e","f"]:
 
     streets_count = {}
     for car in cars:
-        print(car.num_streets)
+        #print(car.num_streets)
         for street in car.route:
             if street not in streets_count:
                 streets_count[street] = 1
@@ -27,8 +27,6 @@ for name in ["a","b","c","d","e","f"]:
     for street in streets:
         if street.name not in streets_count:
             streets_count[street.name] = 0
-        else:
-            streets_count[street.name] = 1
         intersections[street.end].add_street_with_weight(street.name, streets_count[street.name])
         # pprint(vars(intersections[street.end]))
 
@@ -39,7 +37,7 @@ for name in ["a","b","c","d","e","f"]:
 
     intersections = [x for x in intersections.values() if x.cycle != []]
     for intersection in intersections:
-        print(intersection.cycle)
+        #print(intersection.cycle)
 
     write_output(name+'.out', intersections)
 
