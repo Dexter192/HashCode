@@ -19,6 +19,5 @@ for name in ["a","b","c","d","e","f"]:
     #ALGORITHM 1 REALLY BAD
     for intersection in intersections.values():
         intersection.cycle = [(s.name ,1) for s in intersection.streets]
-        print(intersection.cycle)
 
     write_output(name+'.out', intersections.values())
