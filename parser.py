@@ -83,6 +83,6 @@ if __name__ == '__main__':
     print(streets[0].name)
     i1 = Intersection(0, 2, ['a', 'b'])
     i1.cycle = [('a', 1), ('b', 1)]
-    i2 = Intersection(1, 2, ['c', 'd'])
+    i2 = Intersection(0, 2, ['c', 'd'])
     i2.cycle = [('d', 4), ('c', 3)]
     write_output("a",[i1,i2])
