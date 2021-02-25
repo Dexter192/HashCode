@@ -64,7 +64,7 @@ def load_cars(lines):
     list_cars=[]
     for line in lines:
         attributes = line.split(' ')
-        print(attributes)
+        # print(attributes)
         car1 = Car(int(attributes[0]), attributes[1:-1])
         list_cars.append(car1)
     return list_cars
