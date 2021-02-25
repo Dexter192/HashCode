@@ -7,13 +7,10 @@ def load_file(name):
         return [line.strip() for line in infile.readlines()]
     return lines
 
-#the_file = load_file("/input/a_exa")
-
 def clean_file(the_file):
     splitted = [file.split(' ') for file in the_file]
+    splitted = [[int(x) for x in list] for list in splitted]
     return splitted
-
-#cleaned_file = clean_file(the_file)
 
 def flat_list(cleaned_file):
     flattened_list = []
@@ -21,10 +18,6 @@ def flat_list(cleaned_file):
         for item in sublist:
             flattened_list.append(int(item))
     return flattened_list
-
-
-#df = np.asarray(flat_list(cleaned_file))
-#print(df)
 
 def load_files():
     names = os.listdir("./input/")
