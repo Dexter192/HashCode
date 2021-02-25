@@ -30,6 +30,7 @@ class Intersection:
     def __init__(self, id):
         self.num_streets = 0
         self.streets = []
+        self.weights = []
         # self.green = np.zeros(len(simulation.duration))
         self.id = id
         #List of tuples (routename, seconds green)
@@ -39,13 +40,18 @@ class Intersection:
         self.num_streets += 1
         self.streets.append(street)
 
+    def add_street_with_weight(self, street, weight):
+        self.num_streets += 1
+        self.streets.append(street)
+        self.weights.append(weight)
+
 
 def load_file(name):
     with open('input/'+name) as infile:
         lines = [line.strip() for line in infile.readlines()]
     simulation_info = load_simulation_info(lines[0])
     streets = load_streets(lines[1:simulation_info.total_streets+1])
-    cars = load_cars(lines[simulation_info.total_streets+1:-1])
+    cars = load_cars(lines[simulation_info.total_streets+1:])
     return simulation_info, cars, streets
 
 def load_simulation_info(input_line):
@@ -58,6 +64,7 @@ def load_cars(lines):
     list_cars=[]
     for line in lines:
         attributes = line.split(' ')
+        print(attributes)
         car1 = Car(int(attributes[0]), attributes[1:-1])
         list_cars.append(car1)
     return list_cars
