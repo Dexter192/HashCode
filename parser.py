@@ -27,13 +27,18 @@ class Street:
 
 
 class Intersection:
-    def __init__(self, id, num_streets, streets):
-        self.num_streets = num_streets
-        self.streets = streets
+    def __init__(self, id):
+        self.num_streets = 0
+        self.streets = []
         # self.green = np.zeros(len(simulation.duration))
         self.id = id
         #List of tuples (routename, seconds green)
         self.cycle = []#[(routename, 2), (routename2, 3), (routename3, 1)]
+
+    def add_street(street):
+        self.num_streets += 1
+        self.streets.append(street)
+
 
 def load_file(name):
     with open('input/'+name) as infile:
