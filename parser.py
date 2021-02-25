@@ -27,15 +27,13 @@ class Street:
 
 
 class Intersection:
-    def __init__(self, id, number_streets, streets):
-        self.number_streets = number_streets
+    def __init__(self, id, num_streets, streets):
+        self.num_streets = num_streets
         self.streets = streets
-        self.green = np.zeros(len(simulation.duration))
+        # self.green = np.zeros(len(simulation.duration))
         self.id = id
         #List of tuples (routename, seconds green)
         self.cycle = []#[(routename, 2), (routename2, 3), (routename3, 1)]
-
-
 
 def load_file(name):
     with open('input/'+name) as infile:
@@ -68,7 +66,23 @@ def load_streets(lines):
         list_streets.append(street)
     return list_streets
 
-simulation_info, cars, streets = load_file('a.txt')
-print(simulation_info.duration)
-print(cars[0].route[0])
-print(streets[0].name)
+def write_output(file_name, intersections):
+    with open('output/'+file_name + '.out', 'w') as out:
+        out.write(str(len(intersections)) + '\n')
+        for intersection in intersections:
+            out.write(str(intersection.id) + '\n')
+            out.write(str(intersection.num_streets) + '\n')
+            for cycle_segment in intersection.cycle:
+                out.write(cycle_segment[0] + ' ' + str(cycle_segment[1]) + '\n')
+
+
+if __name__ == '__main__':
+    simulation_info, cars, streets = load_file('a.txt')
+    print(simulation_info.duration)
+    print(cars[0].route)
+    print(streets[0].name)
+    i1 = Intersection(0, 2, ['a', 'b'])
+    i1.cycle = [('a', 1), ('b', 1)]
+    i2 = Intersection(1, 2, ['c', 'd'])
+    i2.cycle = [('d', 4), ('c', 3)]
+    write_output("a",[i1,i2])
