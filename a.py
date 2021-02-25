@@ -28,6 +28,7 @@ for name in ["a","b","c","d","e","f"]:
         if street.name not in streets_count:
             streets_count[street.name] = 0
         else:
+            streets_count[street.name] = 1
             intersections[street.end].add_street_with_weight(street.name, streets_count[street.name])
         # pprint(vars(intersections[street.end]))
 
