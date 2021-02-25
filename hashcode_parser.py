@@ -35,7 +35,7 @@ class Intersection:
         #List of tuples (routename, seconds green)
         self.cycle = []#[(routename, 2), (routename2, 3), (routename3, 1)]
 
-    def add_street(street):
+    def add_street(self,street):
         self.num_streets += 1
         self.streets.append(street)
 
@@ -44,7 +44,7 @@ def load_file(name):
     with open('input/'+name) as infile:
         lines = [line.strip() for line in infile.readlines()]
     simulation_info = load_simulation_info(lines[0])
-    streets = load_streets(lines[1:simulation_info.total_streets])
+    streets = load_streets(lines[1:simulation_info.total_streets+1])
     cars = load_cars(lines[simulation_info.total_streets+1:-1])
     return simulation_info, cars, streets
 
@@ -72,7 +72,7 @@ def load_streets(lines):
     return list_streets
 
 def write_output(file_name, intersections):
-    with open('output/'+file_name + '.out', 'w') as out:
+    with open('output/'+file_name, 'w') as out:
         out.write(str(len(intersections)) + '\n')
         for intersection in intersections:
             out.write(str(intersection.id) + '\n')
