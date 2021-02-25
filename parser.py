@@ -3,7 +3,7 @@ import os
 import numpy as np
 
 class simulation:
-    def __init__(duration, num_intersections, total_streets, total_cars, bonus_points):
+    def __init__(self, duration, total_intersections, total_streets, total_cars, bonus_points):
         self.duration = duration
         self.total_intersections = total_intersections
         self.total_streets = total_streets
@@ -39,30 +39,35 @@ class intersection:
 
 def load_file(name):
     with open('input/'+name) as infile:
-        return [line.strip() for line in infile.readlines()]
-    return lines
+        lines = [line.strip() for line in infile.readlines()]
+    simulation_info = load_simulation_info(lines[0])
+    cars = load_cars(lines[1:simulation_info.total_streets])
+    streets = load_streets(lines[simulation_info.total_streets+1:-1])
+    return simulation_info, cars, streets
 
-def clean_file(the_file):
-    splitted = [file.split(' ') for file in the_file]
+def load_simulation_info(input_line):
+    splitted = input_line.split(' ')
     splitted = [[int(x) for x in list] for list in splitted]
-    return splitted
+    return simulation( splitted[0], splitted[1], splitted[2], splitted[3], splitted[4])
 
-def flat_list(cleaned_file):
-    flattened_list = []
-    for sublist in cleaned_file:
-        for item in sublist:
-            flattened_list.append(int(item))
-    return flattened_list
 
-def load_files():
-    names = os.listdir("./input/")
-    print(names)
-    inputs = []
-    for file_name in names:
-        input = load_file(file_name)
-        clean_input = clean_file(input)
-        inputs.append(clean_input)
-    return inputs
+def load_cars(lines):
+    list_cars=[]
+    for line in lines:
+        attributes = [line.split(' ')]
+        car1 = car(self, int(attributes[0], attributes[1:-1]))
+        list_cars.append(car1)
+    return list_cars
 
-input = load_files()
-print(input)
+
+def load_streets(lines):
+    list_streets = []
+    for line in lines:
+        splitted = [line.split(' ')]
+        list_streets.append(street(int(splitted[0]),int(splitted[1]),splitted[2],int(splitted[3])))
+    return list_streets
+
+simulation_info, cars, streets = load_file('a.txt')
+print(simulation_info.duration)
+print(cars[0].route)
+print(streets[0].name)
